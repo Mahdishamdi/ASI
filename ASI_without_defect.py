@@ -189,18 +189,18 @@ for i in range(steps):
     
     for j in range(len(polarity_vector_new)):
         D.append(polarity_vector_new[j])
-#        M.append(polarity_vector_new[j])
-#        xcomp.append(polarity_vector_new[j][0])
-#        ycomp.append(polarity_vector_new[j][1])
+        M.append(polarity_vector_new[j])
+        xcomp.append(polarity_vector_new[j][0])
+        ycomp.append(polarity_vector_new[j][1])
     vb=0
-#    for k in range(len(vortex_points)):
+    for k in range(len(vortex_points)):
         
-#        vb+=(magnetostatic_field(lattice_points,temp, M, vortex_points[k]))
+        vb+=(magnetostatic_field(lattice_points,temp, M, vortex_points[k]))
     if i>=15000:
         e.append(Energy)
-#        B.append(vb)
-#        mx.append(magnetization(xcomp))
-#        my.append(magnetization(ycomp))
+        B.append(vb)
+        mx.append(magnetization(xcomp))
+        my.append(magnetization(ycomp))
         Data.append(D)
 
 end_time = time.time()
@@ -208,14 +208,14 @@ TIME = end_time - start_time
 print(TIME)
 
 
-#Bz = [b[2] for b in B]
+Bz = [b[2] for b in B]
 E  = np.array(e)
-#Mx = np.array(mx)
-#My = np.array(my)
-#Hz = np.array(Bz)
+Mx = np.array(mx)
+My = np.array(my)
+Hz = np.array(Bz)
 np.save('pv_6lat_T=3.5_60k_2',Data)
-#np.save("lattice_points",lattice_points)
+np.save("lattice_points",lattice_points)
 np.save('E_6lat_T=3.5_60k_2',E)
-#np.save('Mx_6lat_T=3.5_60k_1',Mx)
-#np.save('My_6lat_T=3.5_60k_1',My)
-#np.save('Hz_6lat_T=3.5_60k_1',Hz)
+np.save('Mx_6lat_T=3.5_60k_1',Mx)
+np.save('My_6lat_T=3.5_60k_1',My)
+np.save('Hz_6lat_T=3.5_60k_1',Hz)
