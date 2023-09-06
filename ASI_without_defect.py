@@ -133,18 +133,18 @@ def magnetostatic_field(r,temp, m, point):
     return B
 
 
-def vortex(N):
-    vortex_points = []
+def vertex(N):
+    vertex_points = []
 
     for j in range(int(N/2-1), -(int(N/2-1))-1, -1):
         if j % 2 == 0:
             for i in range(-(int(N/2-1)), int(N/2-1)+1, 2):
-                vortex_points.append([i, j, 0.5])
+                vertex_points.append([i, j, 0.5])
         elif j % 2 == 1 or j % 2 == -1:
             for i in range(-(int(N/2-2)), int(N/2-2)+1, 2):
-                vortex_points.append([i, j, 0.5])
+                vertex_points.append([i, j, 0.5])
 
-    return vortex_points
+    return vertex_points
 
 
 
@@ -168,7 +168,7 @@ Energy=Energy_initial(N,N_input, temp, polarity_vector, dists, vector_rij)
 
 
 
-vortex_points=np.array(vortex(N))
+vertex_points=np.array(vertex(N))
 
 
 
@@ -193,10 +193,11 @@ for i in range(steps):
         xcomp.append(polarity_vector_new[j][0])
         ycomp.append(polarity_vector_new[j][1])
     vb=0
-    for k in range(len(vortex_points)):
+    for k in range(len(vertex_points)):
         
-        vb+=(magnetostatic_field(lattice_points,temp, M, vortex_points[k]))
-    if i>=15000:
+        vb+=(magnetostatic_field(lattice_points,temp, M, vertex_points[k]))
+        
+    if i>=15000: #collecting data after equilibrium 
         e.append(Energy)
         B.append(vb)
         mx.append(magnetization(xcomp))
@@ -214,7 +215,6 @@ Mx = np.array(mx)
 My = np.array(my)
 Hz = np.array(Bz)
 np.save('pv_6lat_T=3.5_60k_2',Data)
-np.save("lattice_points",lattice_points)
 np.save('E_6lat_T=3.5_60k_2',E)
 np.save('Mx_6lat_T=3.5_60k_1',Mx)
 np.save('My_6lat_T=3.5_60k_1',My)
