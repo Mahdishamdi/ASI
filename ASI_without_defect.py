@@ -119,7 +119,7 @@ def magnetization(polarity_vector):
     return mag
 
 
-def magnetostatic_field(r,temp, m, point):
+def magnetostatic_field(r,temp, m, point): # Computing magnetic field in each wertex of the ASI
     
     B = np.zeros(3)
     for i in range(len(r)):
